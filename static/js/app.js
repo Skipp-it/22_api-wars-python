@@ -6,11 +6,22 @@ const variable = 'https://swapi.dev/api/planets/?page=1'
 const modal = document.querySelector('#show-modal')
 const backdrop = document.getElementById('backdrop')
 const closeModalBtn = document.querySelector('.modal__actions')
+const planetsTable = document.querySelector('.planets-table')
+const votesTable = document.querySelector('.votes-table')
+const closeModalVote = document.querySelector('#close-vote')
+
+
+
+closeModalVote.addEventListener('click', ()=>{
+        backdrop.classList.toggle('visible')
+        modal.classList.toggle('visible')
+        votesTable.classList.toggle('visible')})
 
 closeModalBtn.addEventListener('click', ()=>{
         backdrop.classList.toggle('visible')
-        modal.classList.toggle('visible')})
-
+        modal.classList.toggle('visible')
+        planetsTable.classList.toggle('visible')
+        })
 
 
 async function getPlanets(planetsEndpoint) {
@@ -64,20 +75,23 @@ async function getPlanets(planetsEndpoint) {
         if (residentsListLength === 0) {
             residents.innerHTML = `<td>No known residents</td>`
         } else {residents.innerHTML = `<td><button class="btn btn-light residents" type="button" >${residentsListLength} resident(s)</button></td>`
-            // residents.setAttribute('data-index', `${i+1+(count-1)*10}`)
+
             residents.setAttribute('data-residents', `${resultData[i].residents}`)
             residents.setAttribute('data-planet', `${resultData[i].name}`)
             residents.addEventListener('click', openModal)
             }
         list[i].appendChild(residents)
-        let vote = document.createElement('td')
-        vote.innerHTML = `<td><button class="btn btn-light">${'votele lu peste'}</button></td>`
-        list[i].appendChild(vote)
-    }
+        let username = document.getElementById('username')
+        if (username) {
+            let vote = document.createElement('td')
+            vote.innerHTML = `<td><button class="btn btn-light">${'vote'}</button></td>`
+            vote.setAttribute('data-planet', `${resultData[i].name}`)
+            vote.setAttribute('data-index', `${i+1+(count-1)*10}`)
+            list[i].appendChild(vote)
+            vote.addEventListener('click', voteModal)
 
-    //
-    // let oare = document.querySelectorAll('.butonuCuResideti')
-    // if (oare.length !== 0) {console.log('merge oare')}
+        }
+    }
 }
 
 
@@ -85,115 +99,101 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-    nextBtn.addEventListener('click', ()=>{
-        let nextUrlData = document.querySelector('#next')
-        let nextUrl = nextUrlData.dataset.fetch
-        if (nextUrl !== null) {
-            getPlanets(nextUrl)
-        }
-    })
+nextBtn.addEventListener('click', ()=>{
+    let nextUrlData = document.querySelector('#next')
+    let nextUrl = nextUrlData.dataset.fetch
+    if (nextUrl !== null) {
+        getPlanets(nextUrl)
+    }
+})
 
-    previousBtn.addEventListener('click', ()=>{
+previousBtn.addEventListener('click', ()=>{
 
-        let prevUrlData = document.querySelector('#previous')
-        let prevUrl = prevUrlData.dataset.fetch
-        if (prevUrl !== null) {
-            getPlanets(prevUrl)
-        }
-    })
+    let prevUrlData = document.querySelector('#previous')
+    let prevUrl = prevUrlData.dataset.fetch
+    if (prevUrl !== null) {
+        getPlanets(prevUrl)
+    }
+})
 
-    function openModal() {
-        const divPlanet = document.querySelector('.planet')
-        const planetName = this.getAttribute('data-planet')
-        divPlanet.innerHTML = `<h6>Residents of ${planetName}</h6>`
-        let residents = this.getAttribute('data-residents').split(',')
-        let tableModalData = document.querySelector('.modal_table_data')
-        tableModalData.innerHTML = ""
-        backdrop.classList.toggle('visible')
-        modal.classList.toggle('visible')
+function openModal() {
+    const divPlanet = document.querySelector('.planet')
+    const planetName = this.getAttribute('data-planet')
+    divPlanet.innerHTML = `<h6>Residents of ${planetName}</h6>`
+    let residents = this.getAttribute('data-residents').split(',')
+    let tableModalData = document.querySelector('.modal_table_data')
+    tableModalData.innerHTML = ""
+    backdrop.classList.toggle('visible')
+    modal.classList.toggle('visible')
+    planetsTable.classList.toggle('visible')
+    const accessResident = () => {
+        residents.forEach(async resident => {
+            let trModalData = document.createElement('tr')
+            const residentDetails = await fetch(`${resident}`)
+            const residentJson = await residentDetails.json()
 
-        const accessResident = () => {
-            residents.forEach(async resident => {
-                let trModalData = document.createElement('tr')
-                const residentDetails = await fetch(`${resident}`)
-                const residentJson = await residentDetails.json()
+            trModalData.innerHTML = `       <td>${residentJson.name}</td>
+                                            <td>${residentJson.height}</td>
+                                            <td>${residentJson.mass}</td>
+                                            <td>${residentJson.hair_color}</td>
+                                            <td>${residentJson.skin_color}</td>
+                                            <td>${residentJson.eye_color}</td>
+                                            <td>${residentJson.birth_year}</td>
+                                            <td>${residentJson.gender}</td>`
+            tableModalData.appendChild(trModalData)
 
-                trModalData.innerHTML = `       <td>${residentJson.name}</td>
-                                                <td>${residentJson.height}</td>
-                                                <td>${residentJson.mass}</td>
-                                                <td>${residentJson.hair_color}</td>
-                                                <td>${residentJson.skin_color}</td>
-                                                <td>${residentJson.eye_color}</td>
-                                                <td>${residentJson.birth_year}</td>
-                                                <td>${residentJson.gender}</td>`
-                tableModalData.appendChild(trModalData)
-                console.log(trModalData)
-            })
-        }
-
-        accessResident()
-
-        // var z = document.createElement('p'); // is a node
-        // z.innerHTML = 'test satu dua tiga';
-        // document.body.appendChild(z);
-
-        // for (resident of residents) {
-        //     console.log(residents)
-        //     console.log(resident.name)
-        //     async (resident)=> {
-        //         let dataR= await fetch(`${resident}`)
-        //         let residentData = await dataR.json()
-        //         console.log(residentData)
-        //     }
-
-//             const forEachLoop = _ => {
-//               console.log('Start')
-//
-//               fruitsToGet.forEach(async fruit => {
-//                 const numFruit = await getNumFruit(fruit)
-//                 console.log(numFruit)
-//               })
-//
-//               console.log('End')
-// }
-
-            // modal.innerHTML += resident
-            // console.log(resident)
-            // let residentElement = document.createElement('td')
-            // residentElement.innerHTML = `<td>${resident}</td>`
-            // modal.appendChild('residentElement')
+        })
+    }
+    accessResident()
 }
-        // modal.innerHTML = residents
-        // console.log(`buton ${residentsButtonIndex}`)
-        // this.residenceButtons[residenceButtonIndex].addEventListener('click', ()=> {console.log('ai apasat butonul' `${residenceButtons[residenceButtonIndex]}`)})
-        // console.log(residenceButtons[residenceButtonIndex])
-        // // backdrop.classList.toggle('visible')
-        // // modal.classList.toggle('visible')
+
+function voteModal() {
+    const divPlanet = document.querySelector('.votes')
+    const planetName = this.getAttribute('data-planet')
+    const planetID = this.getAttribute('data-index')
+    saveDoc(planetID, planetName)
+    let tableModalDataVotes = document.querySelector('.modal_table_votes')
+    tableModalDataVotes.innerHTML = ""
+    backdrop.classList.toggle('visible')
+    modal.classList.toggle('visible')
+    votesTable.classList.toggle('visible')
+    divPlanet.innerHTML = `<h6>Residents of ${planetName}</h6>`
+}
 
 
+function loadDoc(planetID, planetName) {
+      let xhttp = new XMLHttpRequest();
+      let tableModalDataVotes = document.querySelector('.modal_table_votes')
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+                const data = JSON.parse(xhttp.responseText)
+                data.forEach(elem=>{
+                    let trModalVotes = document.createElement('tr')
+                    trModalVotes.innerHTML = `      
+                                                    <td>${elem.planet}</td>
+                                                    <td>${elem.count}</td>`
+                    tableModalDataVotes.appendChild(trModalVotes)
+                })
+  }};
+
+  xhttp.open("GET", "/vote/" + planetID + "/" + planetName, true);
+  xhttp.send();
+}
+
+
+function saveDoc(planetID, planetName) {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        loadDoc(planetID, planetName)
+    }
+    xhr.open("POST", "/vote/" + planetID + "/" + planetName, true);
+    //Send the proper header information along with the request
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(`id=${planetID}&name=${planetName}`);
+}
 
 
 getPlanets(variable)
 
 
 
-// const variablePeople = 'https://swapi.dev/api/people/'
-// async function getPeople(peopleEndpoint){
-//     let dataPeople = await fetch(`${peopleEndpoint}`)
-//     let jsonDataPeople = await dataPeople.json()
-//     let resultDataPeople = jsonDataPeople.results
-//     console.log(jsonDataPeople)
-// }
-//
-// getPeople((variablePeople))
-//
-// function residences(number) {
-//                 if (number === 3) {
-//                     tdElementResidents.innerHTML = `<td class="btn-residents"><button>${number}</button></td>`
-//                     planetsTr.appendChild(tdElementResidents)
-//                 } else {
-//                     tdElementResidents.innerHTML = `<td><button>No residance</button></td>`
-//                     planetsTr.appendChild(tdElementResidents)
-//                 }
-//             }
-//             residences(3)

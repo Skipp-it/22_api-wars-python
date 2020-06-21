@@ -2,13 +2,14 @@
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
+
 }
 nav {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	min-height: 8vh;
-	background-color: #5d4954;
+	background-color: #010101;
 	font-family: 'Poppins', sans-serif;
 }
 
@@ -52,13 +53,14 @@ nav {
 	width: 60%;
 }
 
+
 @media screen and (max-width: 780px) {
 	.nav-links {
 		position: absolute;
 		right: 0px;
 		height: 92vh;
 		top: 8vh;
-		background-color: #5d4954;
+		background-color: #010101;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -139,6 +141,24 @@ nav {
   animation: fade-slide-in 0.3s ease-out forwards;
 }
 
+.planets-table {
+	position: fixed;
+	z-index: 100;
+	width: auto;
+	height: 10%;
+	top: 9vh;
+	left: 25%;
+	display: none;
+	alignment: center;
+	background-color: #E9ECEF;
+}
+
+.planets-table.visible {
+  display: block;
+	height: auto;
+  animation: fade-slide-in 0.3s ease-out forwards;
+}
+
 .modal .modal__title {
   margin: 0;
   padding: 1rem;
@@ -163,9 +183,6 @@ nav {
 }
 
 
-/*login*/
-
-
 .avatar {
     width: 100px;
     height: 100px;
@@ -181,7 +198,7 @@ nav {
     background: rgba(0,0,0,0.5);
     color: #fff;
     top: 490%;
-    left: 50%;
+    left: 80%;
     position: relative;
     transform: translate(-50%, 40%);
     box-sizing: border-box;
@@ -239,4 +256,25 @@ nav {
 
 .login-box a:hover {
     color: #39dc79;
+}
+
+body {
+	background: url("stormtrooper.jpg") no-repeat fixed center center;
+	background-size: cover !important;
+}
+
+.logo {
+	background: fixed center center;
+	width: 100px;
+    height: 50px;
+    border-radius: 0%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.img-fluid {
+    max-width: 166%;
+    margin-left: -43%;
+    margin-top: -21%;
+    height: auto;
 }
