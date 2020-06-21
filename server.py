@@ -1,16 +1,18 @@
 from datetime import datetime
-import os
 from flask import Flask, render_template, url_for, request, session, redirect, flash
-import queries
+import data_manager
+from util import json_response
+
 
 app = Flask('__name__')
-app.secret_key = queries.random_api_key()
-# app.secret_key = '123'
+# app.secret_key = data_manager.random_api_key()
+app.secret_key = '123'
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -21,9 +23,10 @@ def register():
         username = request.form.get('username')
         password = request.form.get('password')
         submission_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        if queries.register_user(username, password, submission_time) is False:
+        if data_manager.register_user(username, password, submission_time) is False:
             flash('Not registered')
-        queries.register_user(username, password, submission_time)
+        data_manager.register_user(username, password, submission_time)
+        flash('Successful registration. Log in to continue.')
         return redirect(url_for("login"))
     return render_template("register.html")
 
@@ -33,10 +36,11 @@ def login():
     if 'user_id' in session:
         return redirect(url_for("index"))
     if request.method == 'POST':
-        username, typed_password = request.form.get('username'), request.form.get('password')
-        user = queries.check_user(username)
-        if user and queries.verify_password(typed_password, user[1]):
-            session['user_id'] = user[0]
+        username, typed_password = request.form.get(
+            'username'), request.form.get('password')
+        user = data_manager.check_user(username)
+        if user and data_manager.verify_password(typed_password, user['password']):
+            session['user_id'] = user['id']
             session['username'] = username
             flash('User logged in!')
             return redirect('/')
@@ -55,15 +59,27 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route("/vote/<planetID>/<planetName>", methods=['GET', 'POST'])
+@json_response
+def vote(planetID, planetName):
+    if request.method == 'POST':
+        planet_id = planetID
+        planet_name = planetName
+        user_id = session['user_id']
+        submission_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        data_manager.vote_planet(planet_id, planet_name, user_id, submission_time)
+        flash(f'Voted on planet {planetName} successfully')
+        return render_template('index.html')
+    user_id = session['user_id']
+    date = data_manager.planets_votes(user_id)
+    return date
+
 
 def main():
     app.run(debug=True,
             port=8001)
 
 
-
 if __name__ == '__main__':
     main()
-
-
 
