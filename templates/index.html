@@ -20,7 +20,7 @@
                 <th scope="col">Surface Water</th>
                 <th scope="col">Population</th>
                 <th scope="col">Residents</th>
-                <th scope="col">Votes</th>
+                <th scope="col">Vote</th>
             </tr>
         </thead>
         <tbody class="planets"></tbody>
@@ -28,32 +28,93 @@
 </div>
 <div id="backdrop"></div>
 <div class="modal card" id="show-modal" >
+    <div class="modal__content">
 
-  <div class="modal__content">
-      <table class="table table-hover" >
-        <thead class="thead-light">
-            <tr>
-                <th scope="col"> <b>Name</b> </th>
-                <th scope="col"> <b>Height</b> </th>
-                <th scope="col"> <b>Mass</b> </th>
-                <th scope="col"> <b>Hair Color</b> </th>
-                <th scope="col"> <b>Skin Color</b> </th>
-                <th scope="col"> <b>Eye Color</b> </th>
-                <th scope="col"> <b>Birth Year</b> </th>
-                <th scope="col"> <b>Gender</b> </th>
-            </tr>
-        </thead>
-        <tbody class="modal_table_data">
-        </tbody>
-           <div class="planet"></div>
-            <div class="modal__actions">
-                <button class="btn btn--passive">x</button>
-            </div>
-      </table>
+        <div class="planets-table">
+              <table class="table table-hover" >
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col"> <b>Name</b> </th>
+                            <th scope="col"> <b>Height</b> </th>
+                            <th scope="col"> <b>Mass</b> </th>
+                            <th scope="col"> <b>Hair Color</b> </th>
+                            <th scope="col"> <b>Skin Color</b> </th>
+                            <th scope="col"> <b>Eye Color</b> </th>
+                            <th scope="col"> <b>Birth Year</b> </th>
+                            <th scope="col"> <b>Gender</b> </th>
+                        </tr>
+                    </thead>
+                    <tbody class="modal_table_data">
+                    </tbody>
+                    <div class="planet"></div>
+                    <div class="modal__actions">
+                        <button class="btn btn--passive">x</button>
+                    </div>
+              </table>
+        </div>
+        <div class="votes-table">
 
+
+            <table class="table table-hover" >
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col"> <b>Planet Name</b> </th>
+                        <th scope="col"> <b>Received Votes</b> </th>
+                    </tr>
+                </thead>
+                <tbody class="modal_table_votes">
+                </tbody>
+                    <div class="votes"></div>
+                    <div class="modal__actions-vote">
+                        <button class="btn btn--passive" id="close-vote">x</button>
+                    </div>
+            </table>
+
+         </div>
+        <div class="close-btn"></div>
     </div>
-    <div class="close-btn"></div>
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="modal-votes" id="show-votes">-->
+<!--     <div class="modal__content">-->
+<!--          <table class="table table-hover" >-->
+<!--                <thead class="thead-light">-->
+<!--                    <tr>-->
+<!--                        <th scope="col"> <b>Planet Name</b> </th>-->
+<!--                        <th scope="col"> <b>Received Votes</b> </th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody class="modal_table_votes">-->
+<!--                </tbody>-->
+<!--                    <div class="votesTBody"></div>-->
+<!--                    <div class="modal__actions-vote">-->
+<!--                        <button class="btn btn&#45;&#45;passive">x</button>-->
+<!--                    </div>-->
+<!--          </table>-->
+<!--        <div class="close-btn"></div>-->
+<!--    </div>-->
+
+<!--</div>-->
+
 {% endblock %}
+
+
+
+
+
+
+
+
+
