@@ -1,0 +1,343 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+
+}
+nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 8vh;
+	background-color: #010101;
+	font-family: 'Poppins', sans-serif;
+}
+
+.logo {
+	color: rgb(197, 193, 193);
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	font-size: 20px;
+}
+.nav-links {
+	display: flex;
+	justify-content: space-around;
+	width: 30%;
+}
+.nav-links li {
+	list-style: none;
+}
+.nav-links a {
+	color: rgb(197, 193, 193);
+	text-decoration: none;
+	letter-spacing: 3px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+#username {
+	color: #734E0C;
+	letter-spacing: 3px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.burger {
+	display: none;
+	cursor: pointer;
+}
+.burger div {
+	width: 25px;
+	height: 3px;
+	background-color: rgb(197, 193, 193);
+	margin: 5px;
+}
+@media screen and (max-width: 1024px) {
+	body {
+		overflow: hidden;
+	}
+}
+.nav-links {
+	width: 60%;
+}
+
+
+@media screen and (max-width: 780px) {
+	.nav-links {
+		position: absolute;
+		right: 0px;
+		height: 92vh;
+		top: 8vh;
+		background-color: #010101;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 50%;
+		transform: translatex(100%);
+		transition: transform 0.5s ease-in;
+	}
+	.nav-links li {
+		opacity: 0;
+	}
+	.burger {
+		display: block;
+	}
+}
+.nav-active {
+	transform: translateX(0%);
+}
+
+@keyframes navLinkFade {
+	from {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+
+
+/*modalu'*/
+
+
+#backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10;
+  pointer-events: none;
+  display: none;
+}
+
+#backdrop.visible {
+  display: block;
+  pointer-events: all;
+}
+
+#add-modal .modal__content {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: 40rem;
+    left: calc(50% - 20rem);
+  }
+}
+
+.modal {
+	position: fixed;
+	z-index: 100;
+	width: auto;
+	height: 10%;
+	top: 9vh;
+	left: 25%;
+	display: none;
+	alignment: center;
+	background-color: #E9ECEF;
+}
+
+.modal.visible {
+  display: block;
+	height: auto;
+  animation: fade-slide-in 0.3s ease-out forwards;
+}
+
+.planets-table {
+	position: fixed;
+	z-index: 100;
+	width: auto;
+	height: 10%;
+	top: 9vh;
+	left: 25%;
+	display: none;
+	alignment: center;
+	background-color: #E9ECEF;
+}
+
+.planets-table.visible {
+  display: block;
+	height: auto;
+  animation: fade-slide-in 0.3s ease-out forwards;
+}
+
+.modal .modal__title {
+  margin: 0;
+  padding: 1rem;
+  border-bottom: 1px solid #00329e;
+  background: #00329e;
+  color: white;
+  border-radius: 10px 10px 0 0;
+}
+
+.modal .modal__content {
+  padding: 1rem;
+}
+
+.modal .modal__actions {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.planet {
+	column-span: 3;
+}
+
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+
+.login-box {
+    width: 320px;
+    height: 420px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    top: 490%;
+    left: 80%;
+    position: relative;
+    transform: translate(-50%, 40%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+
+.login-box p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.login-box input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.login-box input[type="email"], input[type="text"], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #9f9691;
+  opacity: 1; /* Firefox */
+}
+
+
+.login-box input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1c8abd;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.login-box input[type="submit"]:hover {
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+}
+
+.login-box a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+}
+
+.login-box a:hover {
+    color: #39dc79;
+}
+
+body {
+	background: url("stormtrooper.jpg") no-repeat fixed center center;
+	background-size: cover !important;
+}
+
+.logo {
+	background: fixed center center;
+	width: 100px;
+    height: 50px;
+    border-radius: 0%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+.img-fluid {
+    max-width: 166%;
+    margin-left: -43%;
+    margin-top: -21%;
+    height: auto;
+}
+
+h1 {
+	color: #734E0C;
+}
+
+/*loader gif*/
+
+.loader-wrapper .visible {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 101;
+	top: 0;
+	left: 0;
+	background-color: #242f3f;
+	display: flex;
+	justify-content: center;
+	opacity: 0.5;
+}
+.loader .visible{
+	display: inline-block;
+	z-index: 101;
+	top: 50%;
+	left: 50%;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	border: 4px solid #Fff;
+	animation: loader 2s infinite ease;
+}
+
+.loader-inner .visible{
+	position: absolute;
+	z-index: 101;
+	vertical-align: top;
+	display: inline-block;
+	width: 100%;
+	background-color: #fff;
+	animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+  0% { transform: rotate(0deg);}
+  25% { transform: rotate(180deg);}
+  50% { transform: rotate(180deg);}
+  75% { transform: rotate(360deg);}
+  100% { transform: rotate(360deg);}
+}
+@keyframes loader-inner {
+  0% { height: 0%;}
+  25% { height: 0%;}
+  50% { height: 100%;}
+  75% { height: 100%;}
+  100% { height: 0%;}
+}

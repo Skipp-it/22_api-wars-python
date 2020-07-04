@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<h1>Star Wars universe planets</h1>
+<div>
+    <button id="previous" class="btn btn-primary btn-sm" style="border-radius: 7px">&laquo; Previous</button>
+    <button id="next" class="btn btn-primary btn-sm" style="border-radius: 7px">Next &raquo;</button>
+</div>
+<div class="jumbotron">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Diameter</th>
+                <th scope="col">Climate</th>
+                <th scope="col">Terrain</th>
+                <th scope="col">Surface Water</th>
+                <th scope="col">Population</th>
+                <th scope="col">Residents</th>
+                <th scope="col">Vote</th>
+            </tr>
+        </thead>
+        <tbody class="planets"></tbody>
+    </table>
+</div>
+<div id="backdrop"></div>
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+<div class="modal card" id="show-modal" >
+
+    <div class="modal__content">
+        <div class="planets-table">
+              <table class="table table-hover" >
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col"> <b>Name</b> </th>
+                            <th scope="col"> <b>Height</b> </th>
+                            <th scope="col"> <b>Mass</b> </th>
+                            <th scope="col"> <b>Hair Color</b> </th>
+                            <th scope="col"> <b>Skin Color</b> </th>
+                            <th scope="col"> <b>Eye Color</b> </th>
+                            <th scope="col"> <b>Birth Year</b> </th>
+                            <th scope="col"> <b>Gender</b> </th>
+                        </tr>
+                    </thead>
+                    <tbody class="modal_table_data">
+                    </tbody>
+                    <div class="modal-body">
+                        <div class="planet"></div>
+                        <div class="modal__actions">
+                            <button class="btn btn--passive">x</button>
+                        </div>
+                    </div>
+              </table>
+        </div>
+        <div class="votes-table">
+            <table class="table table-hover" >
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col"> <b>Planet Name</b> </th>
+                        <th scope="col"> <b>Received Votes</b> </th>
+                    </tr>
+                </thead>
+                <tbody class="modal_table_votes">
+                </tbody>
+                    <div class="votes"></div>
+                    <div class="modal__actions-vote">
+                        <button class="btn btn--passive" id="close-vote">x</button>
+                    </div>
+            </table>
+
+         </div>
+        <div class="close-btn"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
