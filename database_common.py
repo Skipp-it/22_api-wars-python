@@ -9,8 +9,6 @@ import urllib
 production = True
 
 
-
-
 def get_connection_string():
     # setup connection string
     # to do this, please define these environment variables first

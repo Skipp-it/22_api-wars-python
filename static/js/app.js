@@ -31,16 +31,20 @@ async function getPlanets(planetsEndpoint) {
     let data = await fetch(`${planetsEndpoint}`)
     let jsonData = await data.json()
     let resultData = jsonData.results
-    nextBtn.setAttribute('data-fetch', jsonData.next)
-    if (jsonData.next === null) {
+    let nextUrl = jsonData.next
+    let previousUrl = jsonData.previous
+    if (nextUrl === null) {
         nextBtn.setAttribute('disabled', true)
     } else {
+        let nextHttps = nextUrl.replace("http", 'https')
+        nextBtn.setAttribute('data-fetch', nextHttps)
         nextBtn.removeAttribute('disabled')
     }
-    previousBtn.setAttribute('data-fetch', jsonData.previous)
-    if (jsonData.previous === null) {
+    if (previousUrl === null) {
         previousBtn.setAttribute('disabled', true)
     } else {
+        let prevHttps = previousUrl.replace("http", 'https')
+        previousBtn.setAttribute('data-fetch', prevHttps)
         previousBtn.removeAttribute('disabled')
     }
 
