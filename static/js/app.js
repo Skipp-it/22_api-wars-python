@@ -145,7 +145,8 @@ function openModal() {
     const accessResident = () => {
         residents.forEach(async resident => {
             let trModalData = document.createElement('tr')
-            const residentDetails = await fetch(`${resident}`)
+            let httpsResident = resident.replace('http', 'https')
+            const residentDetails = await fetch(`${httpsResident}`)
             const residentJson = await residentDetails.json()
 
             trModalData.innerHTML = `       <td>${residentJson.name}</td>
@@ -158,16 +159,10 @@ function openModal() {
                                             <td>${residentJson.gender}</td>`
             tableModalData.appendChild(trModalData)
             let nrTr = tableModalData.querySelectorAll('tr')
-            console.log(nrTr.length)
-            console.log(residents.length)
-            console.log(typeof nrTr)
-            console.log(typeof residents)
             if (nrTr.length === residents.length) {
                 toggleLoadingScreen()
             }
-
         })
-
     }
     accessResident()
 }
@@ -217,7 +212,6 @@ function saveDoc(planetID, planetName) {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(`id=${planetID}&name=${planetName}`);
 }
-
 
 getPlanets(variable)
 
