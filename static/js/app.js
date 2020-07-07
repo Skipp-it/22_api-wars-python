@@ -196,7 +196,6 @@ function loadDoc(planetID, planetName) {
                     tableModalDataVotes.appendChild(trModalVotes)
                 })
   }};
-
   xhttp.open("GET", "/vote/" + planetID + "/" + planetName, true);
   xhttp.send(); // eroare in Heroku
 }
@@ -210,7 +209,7 @@ function saveDoc(planetID, planetName) {
     xhr.open("POST", "/vote/" + planetID + "/" + planetName, true);
     //Send the proper header information along with the request
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send(`id=${planetID}&name=${planetName}`); // eroare in Heroku
+    xhr.send(`id=${planetID}&name=${planetName}`);
 }
 
 getPlanets(variable)
