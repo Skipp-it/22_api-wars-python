@@ -181,26 +181,26 @@ function voteModal() {
     divPlanet.innerHTML = `<h6>Residents of ${planetName}</h6>`
 }
 
-
+//GET
 function loadDoc(planetID, planetName) {
       let xhttp = new XMLHttpRequest();
       let tableModalDataVotes = document.querySelector('.modal_table_votes')
       xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-                const data = JSON.parse(xhttp.responseText)
-                data.forEach(elem=>{
+              const data = JSON.parse(xhttp.responseText)
+              data.forEach(elem=>{
                     let trModalVotes = document.createElement('tr')
                     trModalVotes.innerHTML = `      
                                                     <td>${elem.planet}</td>
                                                     <td>${elem.count}</td>`
                     tableModalDataVotes.appendChild(trModalVotes)
-                })
+              })
   }};
-  xhttp.open("GET", "/vote/" + planetID + "/" + planetName, true);
+  xhttp.open("GET", "/votes", true);
   xhttp.send(); // eroare in Heroku
 }
 
-
+//POST
 function saveDoc(planetID, planetName) {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {

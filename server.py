@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, render_template, url_for, request, session, redirect, flash
+from flask import Flask, render_template, url_for, request, session, redirect, flash, jsonify
 import data_manager
 from util import json_response
 
@@ -62,7 +62,7 @@ def logout():
 @app.route("/vote/<planetID>/<planetName>", methods=['GET', 'POST'])
 @json_response
 def vote(planetID, planetName):
-    if request.method == 'POST':
+    # if request.method == 'POST':
         planet_id = planetID
         planet_name = planetName
         user_id = session['user_id']
@@ -70,6 +70,11 @@ def vote(planetID, planetName):
         data_manager.vote_planet(planet_id, planet_name, user_id, submission_time)
         flash(f'Voted on planet {planetName} successfully')
         return "ok", 200
+
+
+@app.route("/votes")
+@json_response
+def votes():
     user_id = session['user_id']
     date = data_manager.planets_votes(user_id)
     return date
