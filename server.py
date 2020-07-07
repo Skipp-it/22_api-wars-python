@@ -69,7 +69,8 @@ def vote(planetID, planetName):
         submission_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         data_manager.vote_planet(planet_id, planet_name, user_id, submission_time)
         flash(f'Voted on planet {planetName} successfully')
-        return render_template('index.html')
+        return redirect(url_for('index'))
+
     user_id = session['user_id']
     date = data_manager.planets_votes(user_id)
     return date
