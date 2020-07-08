@@ -6,7 +6,7 @@ import os
 import psycopg2
 import urllib
 
-production = True
+production = False
 
 
 def get_connection_string():

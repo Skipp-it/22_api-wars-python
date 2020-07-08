@@ -9,9 +9,6 @@ const planetsTable = document.querySelector('.planets-table')
 const votesTable = document.querySelector('.votes-table')
 const closeModalVote = document.querySelector('#close-vote')
 
-// $(window).on("load",function(){
-//      $(".loader-wrapper").fadeOut("slow");
-// });
 
 closeModalVote.addEventListener('click', ()=>{
         backdrop.classList.toggle('visible')
@@ -173,6 +170,7 @@ function voteModal() {
     const planetName = this.getAttribute('data-planet')
     const planetID = this.getAttribute('data-index')
     saveDoc(planetID, planetName)
+    //
     let tableModalDataVotes = document.querySelector('.modal_table_votes')
     tableModalDataVotes.innerHTML = ""
     backdrop.classList.toggle('visible')
@@ -181,36 +179,68 @@ function voteModal() {
     divPlanet.innerHTML = `<h6>Residents of ${planetName}</h6>`
 }
 
-//GET
-function loadDoc(planetID, planetName) {
-      let xhttp = new XMLHttpRequest();
-      let tableModalDataVotes = document.querySelector('.modal_table_votes')
-      xhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-              const data = JSON.parse(xhttp.responseText)
-              data.forEach(elem=>{
-                    let trModalVotes = document.createElement('tr')
-                    trModalVotes.innerHTML = `      
-                                                    <td>${elem.planet}</td>
-                                                    <td>${elem.count}</td>`
-                    tableModalDataVotes.appendChild(trModalVotes)
-              })
-  }};
-  xhttp.open("GET", "/votes", true);
-  xhttp.send(); // eroare in Heroku
-}
+// //GET
+// function loadDoc(planetID, planetName) {
+//       let xhttp = new XMLHttpRequest();
+//       let tableModalDataVotes = document.querySelector('.modal_table_votes')
+//       xhttp.onreadystatechange = function() {
+//           if (this.readyState == 4 && this.status == 200) {
+//               const data = JSON.parse(xhttp.responseText)
+//               data.forEach(elem=>{
+//                     let trModalVotes = document.createElement('tr')
+//                     trModalVotes.innerHTML = `
+//                                                     <td>${elem.planet}</td>
+//                                                     <td>${elem.count}</td>`
+//                     tableModalDataVotes.appendChild(trModalVotes)
+//               })
+//   }};
+//   xhttp.open("GET", "/votes", true);
+//   xhttp.send(); // eroare in Heroku
+// }
+
+// //POST
+// function saveDoc(planetID, planetName) {
+//     const xhr = new XMLHttpRequest();
+//     xhr.onload = function () {
+//         loadDoc(planetID, planetName)
+//     }
+//     xhr.open("POST", "/vote/" + planetID + "/" + planetName, true);
+//     //Send the proper header information along with the request
+//     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//     xhr.send(`id=${planetID}&name=${planetName}`);
+// }
+//
+//
+
+
+// //GET
+// async function loadDoc(planetID, planetName) {
+//     let data = await fetch(`/votes`)
+//     let jsonData = await data.json()
+//     console.log(jsonData)
+//     return jsonData
+// }
 
 //POST
-function saveDoc(planetID, planetName) {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        loadDoc(planetID, planetName)
-    }
-    xhr.open("POST", "/vote/" + planetID + "/" + planetName, true);
-    //Send the proper header information along with the request
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send(`id=${planetID}&name=${planetName}`);
+async function saveDoc(planetID, planetName) {
+    let submitData = {
+        'planet_id': `${planetID}`,
+        'planet_name': `${planetName}`
+    };
+    let response = await fetch(`/vote`, {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "include",
+        headers: {"Content-Type": "application/json"},
+        redirect: "follow",
+        body: JSON.stringify(submitData)
+    })
+    let result = await response.json()
+    // console.log(response)
+    console.log(result.body)
 }
+
 
 getPlanets(variable)
 
