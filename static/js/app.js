@@ -236,9 +236,12 @@ async function saveDoc(planetID, planetName) {
         redirect: "follow",
         body: JSON.stringify(submitData)
     })
-    let result = await response.json()
+    // let result = await response.json()
+    //     .then(res=> console.log(res))
+    await response.json().then((result)=> console.log(result))
+        // console.log(resBody)
     // console.log(response)
-    console.log(result.body)
+    // console.log(result)
 }
 
 

@@ -72,16 +72,18 @@ def logout():
 @app.route("/vote", methods=['GET', 'POST'])
 @json_response
 def vote():
-    data = request.get_json()
-    planet_id = data['planet_id']
-    planet_name = data['planet_name']
-    user_id = session['user_id']
-    submission_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    data_manager.vote_planet(planet_id, planet_name, user_id, submission_time)
-    # flash(f'Voted on planet {planet_name} successfully')
-    updated_data = data_manager.planets_votes(user_id)
-    response = make_response(jsonify({"message": "JSON received", 'body': updated_data}), 200)
-    print(response)
+    if request.method == 'POST':
+        data = request.get_json()
+        planet_id = data['planet_id']
+        planet_name = data['planet_name']
+        user_id = session['user_id']
+        submission_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        data_manager.vote_planet(planet_id, planet_name, user_id, submission_time)
+        # flash(f'Voted on planet {planet_name} successfully')
+        updated_data = data_manager.planets_votes(user_id)
+        response = make_response(jsonify({"message": "JSON received", 'body': updated_data}), 200)
+        print(response)
+        print(updated_data)
     return response
 
 
