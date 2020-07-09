@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Flask, render_template, url_for, request, session, redirect, flash, jsonify, make_response
 import data_manager
-from util import json_response
+
 
 
 app = Flask('__name__')
