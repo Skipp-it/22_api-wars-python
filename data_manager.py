@@ -36,10 +36,12 @@ def register_user(cursor: RealDictCursor, username: str, text_password: str, sub
     query = """
     INSERT INTO users (username,password,submission_time)
     VALUES (%(username)s,%(password)s,%(submission_time)s)
+    RETURNING id
            """
     args = {"username": username, "password": encrypt_password(
         text_password), "submission_time": submission_time}
-    return cursor.execute(query, args)
+    cursor.execute(query, args)
+    return cursor.fetchall()
 
 
 # func care transforma plain text password in hash salt pass
@@ -92,9 +94,11 @@ def vote_planet(cursor: RealDictCursor, planet_id: int, planet_name: str, user_i
     query = """
         INSERT INTO planet_votes (planet_id, planet_name, user_id, submission_time)
         VALUES (%(planet_id)s, %(planet_name)s, %(user_id)s, %(submission_time)s)
+        RETURNING id
     """
     args = {'planet_id': planet_id, 'planet_name': planet_name, 'user_id': user_id, 'submission_time': submission_time}
     cursor.execute(query, args)
+    return cursor.fetchall()
 
 
 @database_common.connection_handler
