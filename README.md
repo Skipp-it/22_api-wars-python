@@ -1,5 +1,27 @@
 # API Wars
 
+The site provides data about the planets, with lots of details, from
+the Star Wars Universe. 
+
+![Register](/img/register.png 'Register')
+
+The logged in user can vote (new button appears on the "vote"
+column) a planet.
+
+![Planets](/img/planets.png 'Planets')
+
+There is a button to examine the Star Wars characters that come
+from a specific planet.
+
+![Residents](/img/residents.png 'Residents')
+
+
+May the Force be with you!
+
+## For the [the live version](https://sw-mihai.herokuapp.com/) of the app.
+
+
+
 ## Story
 
 Because you are so awesome, a golden humanoid droid want to meet you in the
@@ -85,61 +107,3 @@ sessions.
     - Residents modal is not showing the table's header until the content is loaded
     - A nice background image is used, that fits nicely to the site and does not draw your attention out from actual content
     - Bootstrap is used with non-default colors is used (custom build, or a bootswatch theme)
-
-
-## General requirements
-
-
- - For the whole assignment, get the data using [The Star Wars API](https://swapi.dev/)
- - The page doesn't show a server error anytime during the review
-
-## Hints
-
-- Use Bootstrap, if you don't want to spend too much time with design.
-- Use a `<h1>` tag for the page heading.
-- Add buttons for navigating between chunks of data (loading all planets would
-  take too much resources, so SWAPI implements a pagination. Just look into it's
-  response, it has a `next` and a `previous` attribute).
-- Use a bordered table to display the needed information.
-- You are not required to use AJAX for the base page data. If you like, you can
-  use the back-end for parts of the data processing (like the planet list), BUT
-  the modal windows **must** load by calling an API with AJAX. This API can be
-  SWAPI directly, or you can write a proxy in your web-server. For this, the
-  "[Varying modal content based on trigger
-  button](https://getbootstrap.com/docs/4.1/components/modal/#via-javascript)"
-  section of the Bootstrap documentation might help a lot.
-- For the login system use sessions.
-- For displaying various (error) messages, you can use the flash function of Flask.
-- For sending data from server side to client side with AJAX, it is advised to
-  use JSON.
-- Use Javascript `modules` for cleaner codebase.
-- You are advised to use this data schema for the login system and voting tasks:
-  - `users` table
-    - `id` : serial, primary key
-    - `username` : unique name for users - varchar
-    - `password` : hashed password - varchar
-  - `planet-votes` table
-    - `id` : serial, primary key
-    - `planet_id` : integer (id from SWAPI data)
-    - `planet_name` : varchar
-    - `user_id` : integer, foreign_key
-    - `submission_time` : datetime
-
-## Starting repository
-
-Follow [this link](https://journey.code.cool/v2/project/solo/blueprint/api-wars/python) to create your project repository (which is empty on purpose).
-
-## Background materials
-
-- :exclamation: [A web-framework for Python: Flask](https://learn.code.cool/full-stack/#/../pages/python/python-flask)
-- :open_book: [Flask documentation](http://flask.palletsprojects.com/) (the Quickstart gives a good overview)
-- :exclamation: [The last missing piece: API](https://learn.code.cool/full-stack/#/../pages/web/the-last-missing-piece-api.md)
-- :open_book: [RESTful](https://learn.code.cool/full-stack/#/../pages/web/restful.md)
-- :exclamation: [Creating DOM elements](https://learn.code.cool/full-stack/#/../pages/javascript/javascript-extending-the-dom.md)
-- :open_book: [Front-End Frameworks and Libraries (including Bootstrap)](https://learn.code.cool/full-stack/#/../pages/javascript/frontend-libraries-and-frameworks.md)
-- :exclamation: [JavaScript modules](https://learn.code.cool/full-stack/#/../pages/javascript/javascript-modules.md)
-- :exclamation: [Sessions](https://learn.code.cool/full-stack/#/../pages/web/authentication-sessions.md)
-- :exclamation: [Salted password hashing functions in Werkzeug](https://werkzeug.palletsprojects.com/en/1.0.x/utils/#module-werkzeug.security)
-- :open_book: [Web storage mechanisms](https://learn.code.cool/full-stack/#/../pages/javascript/web-storage-mechanisms.md)
-- :open_book: [Database glossary](https://learn.code.cool/full-stack/#/../pages/sql/database-glossary)
-- :lollipop: [Flask's jsonify function](https://flask.palletsprojects.com/en/1.1.x/api/#flask.json.jsonify)
